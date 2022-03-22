@@ -4,10 +4,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.varalakshmi.stationary.exception.DBException;
 import com.varalakshmi.stationary.model.User;
+import com.varalakshmi.stationary.validator.UserValidator;
 
 public class UserDAOImpl implements UserDAO {
+	private static Logger log = LogManager.getLogger(UserValidator.class);
 
 	public void register(User user) throws DBException {
 		Connection connection = null;
@@ -30,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 			statement.setString(4, user.getContact());
 
 			int rows = statement.executeUpdate();
-			System.out.println("No of rows inserted:" + rows);
+			log.debug("No of rows inserted:" + rows);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException(e.getMessage(), e);

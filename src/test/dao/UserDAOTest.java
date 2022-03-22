@@ -12,7 +12,7 @@ public class UserDAOTest {
 		user.setEmail("varu@gmail.com");
 		user.setPassword("varuvaru");
 		user.setContact("1234567890");
-		System.out.println(user);
+		log.debug(user);
 
 		UserDAO userDAO = new UserDAOImpl();
 		userDAO.register(user);

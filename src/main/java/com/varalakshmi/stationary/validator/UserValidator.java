@@ -1,9 +1,16 @@
 package com.varalakshmi.stationary.validator;
 
+
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.varalakshmi.stationary.model.User;
 
 public class UserValidator {
 	
+	private static Logger log = LogManager.getLogger(UserValidator.class);
+
 	public static void validatorUserDetails(User user) throws Exception {
 
 		if(user.getName()==null) {
@@ -22,7 +29,7 @@ public class UserValidator {
 		else if (user.getContact() == null) {
 			throw new Exception("Invalid Contact");
 		}
-		System.out.println("Validation passed");
+		log.debug("Validation passed");
 
 	}
 

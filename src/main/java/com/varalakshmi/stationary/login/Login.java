@@ -5,14 +5,20 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.varalakshmi.stationary.validator.UserValidator;
+
 
 public class Login {
 
+	private static Logger log = LogManager.getLogger(UserValidator.class);
 	public static void login() throws Exception {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter login Email");
+		log.debug("Enter login Email");
 		String email = scan.next();
-		System.out.println("Enter the password");
+		log.debug("Enter the password");
 		String password = scan.next();
 
 		Connection connection = DriverManager.getConnection("jdbc:mysql://101.53.133.59:3306/revature_training_db",
@@ -27,11 +33,11 @@ public class Login {
 			userpassword = result.getString("password");
 		}
 		if (useremail == null) {
-			System.out.println("No records found - please register");
+			log.debug("No records found - please register");
 		} else if (userpassword.equals(password)) {
-			System.out.println("WELCOME");
+			log.debug("WELCOME");
 		} else {
-			System.out.println("Invalid Credentials");
+			log.debug("Invalid Credentials");
 		}
 
 	}
